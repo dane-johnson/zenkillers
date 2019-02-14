@@ -1,0 +1,6 @@
+"zenkillers"
+{
+        "base"  "base"
+        "title" "Zen Killers"
+        "menusystem"    "1"
+}
