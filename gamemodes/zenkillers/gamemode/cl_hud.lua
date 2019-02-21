@@ -11,7 +11,8 @@ function HUD.DrawHud()
 	
 	draw.RoundedBox(3, 25, bottom - 130, 150, 55, Color(0, 0, 0, 100))
 	
-	draw.SimpleText(client:GetTowerLevel() .. "/" .. GAMEMODE.NumberOfGuns, "HudNumbers", 105, bottom - 120, Color(255, 255, 0, 255), 0, 0)
+	draw.SimpleText(client:GetTowerLevel() .. "/" .. GAMEMODE.NumberOfGuns, "HudNumbers", 105, bottom - 120, Color(255, 255, 0, 200), 0, 0)
+	draw.SimpleText("Weapon", "HudHintTextLarge", 35, bottom - 110, Color(255, 255, 0, 200), 0, 0)
 end
 hook.Add("HUDPaint", "DrawHud", HUD.DrawHud)
 
