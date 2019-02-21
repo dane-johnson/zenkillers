@@ -18,3 +18,8 @@ function TOWER.ResetPlayer(ply)
 	local level = 1 -- As it was in the beginning...
 	ply:SetTowerLevel(1)
 end
+
+function TOWER.HasWon(ply)
+	local level = ply:GetTowerLevel()
+	return level == GAMEMODE.NumberOfGuns
+end
