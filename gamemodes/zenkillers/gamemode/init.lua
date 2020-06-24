@@ -14,7 +14,14 @@ local player = player
 local towername = GetConVar("zk_towername"):GetString()
 TOWER.LoadTower(towername)
 
+function Announce(msg)
+   for _, ply in ipairs(player.GetAll()) do
+      ply:ChatPrint(msg)
+   end
+end
+
 function EndGame(winner)
+   Announce(winner:Nick() .. " has won!")
    for _, ply in ipairs(player.GetAll()) do
       TOWER.ResetPlayer(ply)
       ply:KillSilent()

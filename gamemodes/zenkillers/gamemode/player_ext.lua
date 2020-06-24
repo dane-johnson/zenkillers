@@ -13,7 +13,7 @@ end
 function plymeta:ReceiveWeapons()
    self:StripWeapons()
 
-   local delay = GetConVar("zk_equipdelay")
+   local delay = GetConVarNumber("zk_equipdelay")
    -- Give them new guns after 0.75 seconds (to keep from going to fast)
    timer.Simple(delay, function()
                    local level = self:GetTowerLevel()

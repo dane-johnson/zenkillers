@@ -78,6 +78,9 @@ function TOWER.PromotePlayer(ply)
    local level = ply:GetTowerLevel()
    level = level + 1
    ply:SetTowerLevel(level)
+   if level == TOWER.Size() then
+      Announce(ply:Nick() .. " has reached the stunstick!")
+   end
    ply:ReceiveWeapons()
 end
 
