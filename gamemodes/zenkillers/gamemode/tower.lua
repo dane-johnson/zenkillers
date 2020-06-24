@@ -19,21 +19,21 @@ function TOWER.Size()
 end
 
 function TOWER.LoadTower(name)
-   if not file.Exists("zenkillers/" .. name .. ".dat", "DATA") then
+   if not file.Exists("zenkillers/" .. name .. ".txt", "DATA") then
       if name == "default" then
          if not file.Exists("zenkillers", "DATA") then
             file.CreateDir("zenkillers")
          end
-         local fout = file.Open("zenkillers/default.dat", "w", "DATA")
+         local fout = file.Open("zenkillers/default.txt", "w", "DATA")
          fout:Write(DEFAULT_TOWER)
          fout:Close()
          TOWER.LoadTower("default") -- Recur
       else
-         Error("Zenkillers: Could not find DATA/zenkillers" .. name .. ".dat. Reverting to default...")
+         Error("Zenkillers: Could not find DATA/zenkillers" .. name .. ".txt. Reverting to default...")
          TOWER.LoadTower("default") -- Recur
       end
    else
-      local fin = file.Open("zenkillers/" .. name .. ".dat", "r", "DATA")
+      local fin = file.Open("zenkillers/" .. name .. ".txt", "r", "DATA")
       local weapons = {}
       while not fin:EndOfFile() do
          local weapon = fin:ReadLine():gsub("[\n\r ]", "")
