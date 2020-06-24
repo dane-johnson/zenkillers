@@ -12,13 +12,7 @@ include("player_ext_shd.lua")
 local player = player
 
 local towername = GetConVar("zk_towername"):GetString()
-if towername == "" then
-   -- Warn for default tower
-   Error("Using default tower because \"zk_towername\" is empty.\n")
-else
-   TOWER.LoadTower(towername)
-end
-
+TOWER.LoadTower(towername)
 
 function EndGame(winner)
    for _, ply in ipairs(player.GetAll()) do

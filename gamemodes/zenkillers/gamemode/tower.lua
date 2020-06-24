@@ -3,15 +3,37 @@
 TOWER = {}
 TOWER.WEAPONS = {}
 
+local DEFAULT_TOWER = [[
+weapon_pistol
+weapon_357
+weapon_smg1
+weapon_shotgun
+weapon_frag
+weapon_ar2
+weapon_rpg
+weapon_crossbow
+]]
+
 function TOWER.Size()
    return #TOWER.WEAPONS + 1 -- Always +1 for stunstick
 end
 
 function TOWER.LoadTower(name)
-   if not file.Exists("zenkillers/" .. name .. ".zk", "DATA") then
-      Error("Using default tower as zenkillers/" .. name .. ".zk could not be found in the DATA folder\n")
+   if not file.Exists("zenkillers/" .. name .. ".dat", "DATA") then
+      if name == "default" then
+         if not file.Exists("zenkillers", "DATA") then
+            file.CreateDir("zenkillers")
+         end
+         local fout = file.Open("zenkillers/default.dat", "w", "DATA")
+         fout:Write(DEFAULT_TOWER)
+         fout:Close()
+         TOWER.LoadTower("default") -- Recur
+      else
+         Error("Zenkillers: Could not find DATA/zenkillers" .. name .. ".dat. Reverting to default...")
+         TOWER.LoadTower("default") -- Recur
+      end
    else
-      local fin = file.Open("zenkillers/" .. name .. ".zk", "r", "DATA")
+      local fin = file.Open("zenkillers/" .. name .. ".dat", "r", "DATA")
       local weapons = {}
       while not fin:EndOfFile() do
          local weapon = fin:ReadLine():gsub("[\n\r ]", "")

@@ -3,7 +3,7 @@ GM.Author = "Dane Johnson"
 GM.Email = "daneallenjohnson@protonmail.com"
 GM.Website = "github.com/dane-johnson"
 
-CreateConVar("zk_towername", "", FCVAR_NONE, "The name of the file containing the tower weapon names. See workshop for details on adding towers.")
+CreateConVar("zk_towername", "default", FCVAR_NONE, "The name of the file containing the tower weapon names. See workshop for details on adding towers.")
 
 GM.NumberOfGuns = 1 -- Default tower, just the stunstick
 
