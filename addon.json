@@ -1,0 +1,6 @@
+{
+  "title": "Zen Killers",
+  "type": "gamemode",
+  "tags": ["fun", "realism"],
+  "ignore": [".git/*", ".gitignore", "Makefile", "license.txt", "builds/*"]
+}
