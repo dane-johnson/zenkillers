@@ -2,11 +2,13 @@
 
 function GM:PlayerInitialSpawn(ply)
    TOWER.InitPlayer(ply)
+   ply:SetModel("models/player/leet.mdl")
 end
 
 function GM:PlayerLoadout(ply)
    ply:ReceiveWeapons()
    -- Prevent default loadout
+   print(ply:GetModel())
    return true
 end
 
