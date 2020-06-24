@@ -15,7 +15,7 @@ function GM:PlayerDeath(victim, inflictor, attacker)
    if victim == attacker then
       -- suicide resets the player
       TOWER.ResetPlayer(victim)
-   elseif attacker:GetActiveWeapon():GetClass() == "weapon_stunstick" then
+   elseif attacker:GetActiveWeapon():GetClass() == "weapon_zk_knife" then
       TOWER.ResetPlayer(victim)
       if TOWER.HasWon(attacker) then
          EndGame(attacker)

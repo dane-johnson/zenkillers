@@ -6,7 +6,7 @@ SWEP.Instructions = "Instant kill to setback an opponent or win the game"
 
 SWEP.Spawnable = true
 
-SWEP.Slot = 6
+SWEP.Slot = 0
 SWEP.ViewModelFlip = false
 SWEP.ViewModelFOV = 54
 SWEP.DrawAmmo = false
@@ -31,13 +31,15 @@ function SWEP:PrimaryAttack()
    self:SetNextPrimaryFire(self.Primary.Delay)
 
    -- Hull trace a short attack
-   local spos = self:GetOwner():GetPos()
+   local spos = self:GetOwner():GetShootPos()
    local sdest = spos + (self:GetOwner():GetAimVector() * 70)
 
    local kmins = Vector(1, 1, 1) * -10
    local kmaxs = Vector(1, 1, 1) * 10
 
    local tr = util.TraceHull({start=spos, endpos=sdest, filter=self:GetOwner(), mask=MASK_SHOT_HULL, mins=kmins, maxs=kmaxs})
+
+   print(tr.Entity)
 
    -- If we hit the environment, just do a ray trace.
    if not IsValid(tr.Entity) then
@@ -47,7 +49,7 @@ function SWEP:PrimaryAttack()
    local hitEnt = tr.Entity
 
    if IsValid(hitEnt) then
-      self:SendWeaponAnim(ACT_VM_HITCENTER)
+      self:SendWeaponAnim(ACT_VM_SECONDARYATTACK)
       if SERVER and hitEnt:IsPlayer() then
          -- Dead
          local dmg = DamageInfo()
@@ -64,6 +66,6 @@ function SWEP:PrimaryAttack()
    end
 
    if SERVER then
-      self:GetOwner():SetAnimation(PLAYER_ATTACK_1)
+      self:GetOwner():SetAnimation(PLAYER_ATTACK1)
    end
 end

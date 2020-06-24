@@ -15,7 +15,7 @@ weapon_crossbow
 ]]
 
 function TOWER.Size()
-   return #TOWER.WEAPONS + 1 -- Always +1 for stunstick
+   return #TOWER.WEAPONS + 1 -- Always +1 for knife
 end
 
 function TOWER.LoadTower(name)
@@ -64,7 +64,7 @@ function TOWER.GetWeaponNames()
       end
       table.insert(names, name)
    end
-   table.insert(names, "Stunstick")
+   table.insert(names, "Knife")
    return names
 end
 
@@ -79,7 +79,7 @@ function TOWER.PromotePlayer(ply)
    level = level + 1
    ply:SetTowerLevel(level)
    if level == TOWER.Size() then
-      Announce(ply:Nick() .. " has reached the stunstick!")
+      Announce(ply:Nick() .. " has reached the knife!")
    end
    ply:ReceiveWeapons()
 end

@@ -20,7 +20,7 @@ function plymeta:ReceiveWeapons()
                    if level < TOWER.Size() then
                       local weapon = self:Give(TOWER.WEAPONS[level])
                    end
-                   self:Give("weapon_stunstick")
+                   self:Give("weapon_zk_knife")
    end)
    -- Prevent default loadout
 end
