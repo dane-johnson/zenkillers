@@ -11,7 +11,15 @@
                         "text"  "Tower Name"
                         "help"  "The file to load the list of weapons from"
                         "type"  "Text"
-                        "default" ""
+                        "default" "default"
+                }
+                2
+                {
+                        "name"  "zk_equipdelay"
+                        "text"  "Equipment Delay"
+                        "help"  "The amount of time it takes to switch weapons"
+                        "type"  "Numeric"
+                        "default" 0.75
                 }
         }
 }
