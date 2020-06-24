@@ -3,6 +3,10 @@
 TOWER = {}
 TOWER.WEAPONS = {}
 
+function TOWER.Size()
+   return #TOWER.WEAPONS + 1 -- Always +1 for stunstick
+end
+
 function TOWER.LoadTower(name)
    if not file.Exists("zenkillers/" .. name .. ".zk", "DATA") then
       Error("Using default tower as zenkillers/" .. name .. ".zk could not be found in the DATA folder\n")
@@ -18,13 +22,34 @@ function TOWER.LoadTower(name)
       end
       PrintTable(weapons)
       TOWER.WEAPONS = weapons
-      GM.NumberOfGuns = #weapons + 1 -- Always +1 for stunstick
    end
+end
+
+function TOWER.GetWeaponNames()
+   local names = {}
+   for _, w in ipairs(TOWER.WEAPONS) do
+      local weaponTable = weapons.Get(w)
+      local name
+      if weaponTable then
+         name = weaponTable.PrintName
+         if name == "Scripted Weapon" then
+            -- Come on yall take some pride in your work...
+            name = w
+         end
+      else
+         -- Engine weapons don't have a weapon table?
+         name = w
+      end
+      table.insert(names, name)
+   end
+   table.insert(names, "Stunstick")
+   return names
 end
 
 function TOWER.InitPlayer(ply)
    local level = 1 -- Everyone starts at the bottom
    ply:SetTowerLevel(1)
+   ply:SetTowerNames(TOWER.GetWeaponNames())
 end
 
 function TOWER.PromotePlayer(ply)
@@ -41,5 +66,5 @@ end
 
 function TOWER.HasWon(ply)
    local level = ply:GetTowerLevel()
-   return level == GAMEMODE.NumberOfGuns
+   return level == TOWER.Size()
 end
