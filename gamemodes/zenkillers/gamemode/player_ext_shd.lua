@@ -3,5 +3,5 @@
 local plymeta = FindMetaTable("Player")
 
 function plymeta:GetTowerLevel()
-	return self:GetNWInt("TowerLevel", 1)
+   return self:GetNWInt("TowerLevel", 1)
 end
