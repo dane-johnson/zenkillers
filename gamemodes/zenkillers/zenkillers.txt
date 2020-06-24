@@ -3,6 +3,7 @@
         "base"  "base"
         "title" "Zen Killers"
         "menusystem"    "1"
+        "workshopid"    "2140807650"
         "settings"
         {
                 1

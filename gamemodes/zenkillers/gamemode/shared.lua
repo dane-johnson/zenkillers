@@ -3,6 +3,7 @@ GM.Author = "Dane Johnson"
 GM.Email = "daneallenjohnson@protonmail.com"
 GM.Website = "github.com/dane-johnson"
 
+
 CreateConVar("zk_towername", "default", FCVAR_NONE, "The name of the file containing the tower weapon names. See workshop for details on adding towers.")
 CreateConVar("zk_equipdelay", 0.75, FCVAR_NEVER_AS_STRING, "How long to wait while switching guns")
 
