@@ -7,9 +7,13 @@ Features:
 
 How to add new towers:
 Towers are just lists of weapons stored in the garrysmod/data/zenkillers/ folder. The file has the form
+
 weapon_classname1,Pretty Name 1
+
 weapon_classname2,Pretty Name 2
+
 ...
+
 Etc. See https://youtu.be/pCO49NdvI50 for a step by step guide on how to find weapon class names and build a new tower.
 
 Bugs? Feature requests? Open an issue at https://github.com/dane-johnson/zenkillers
