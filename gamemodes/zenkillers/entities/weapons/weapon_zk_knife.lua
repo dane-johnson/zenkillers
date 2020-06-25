@@ -7,6 +7,8 @@ SWEP.Instructions = "Instant kill to setback an opponent or win the game"
 SWEP.Spawnable = true
 
 SWEP.Slot = 0
+SWEP.SlotPos = 0
+SWEP.Weight = -1
 SWEP.ViewModelFlip = false
 SWEP.ViewModelFOV = 54
 SWEP.DrawAmmo = false
@@ -20,7 +22,7 @@ SWEP.Primary.ClipSize = -1
 SWEP.Primary.DefaultClip = -1
 SWEP.Primary.Automatic = false
 SWEP.Primary.Ammo = "none"
-SWEP.Primary.Delay = 2.0
+SWEP.Primary.Delay = 1.0
 
 SWEP.Secondary.ClipSize = -1
 SWEP.Secondary.DefaultClip = -1
@@ -28,7 +30,7 @@ SWEP.Secondary.Automatic = false
 SWEP.Secondary.Ammo = "none"
 
 function SWEP:PrimaryAttack()
-   self:SetNextPrimaryFire(self.Primary.Delay)
+   self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
 
    -- Hull trace a short attack
    local spos = self:GetOwner():GetShootPos()
@@ -48,8 +50,22 @@ function SWEP:PrimaryAttack()
 
    local hitEnt = tr.Entity
 
+   -- Blood
+   if IsValid(hitEnt) then
+      local edata = EffectData()
+      edata:SetStart(spos)
+      edata:SetOrigin(tr.HitPos)
+      edata:SetNormal(tr.Normal)
+      edata:SetEntity(hitEnt)
+
+      if hitEnt:IsPlayer() or hitEnt:GetClass() == "prop_ragdoll" then
+         util.Effect("BloodImpact", edata)
+      end
+   end
+
    if IsValid(hitEnt) then
       self:SendWeaponAnim(ACT_VM_SECONDARYATTACK)
+      self:EmitSound("Weapon_Knife.Stab")
       if SERVER and hitEnt:IsPlayer() then
          -- Dead
          local dmg = DamageInfo()
@@ -63,6 +79,7 @@ function SWEP:PrimaryAttack()
       end
    else
       self:SendWeaponAnim(ACT_VM_MISSCENTER)
+      self:EmitSound("Weapon_Knife.Slash")   
    end
 
    if SERVER then
