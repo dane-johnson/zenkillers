@@ -3,6 +3,7 @@ AddCSLuaFile("cl_hud.lua")
 AddCSLuaFile("shared.lua")
 AddCSLuaFile("player_ext_shd.lua")
 
+include("bot.lua")
 include("tower.lua")
 include("shared.lua")
 include("player.lua")
