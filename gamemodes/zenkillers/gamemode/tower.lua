@@ -4,14 +4,14 @@ TOWER = {}
 TOWER.WEAPONS = {}
 
 local DEFAULT_TOWER = [[
-weapon_pistol
-weapon_357
-weapon_smg1
-weapon_shotgun
-weapon_frag
-weapon_ar2
-weapon_rpg
-weapon_crossbow
+weapon_pistol,Pistol
+weapon_357,Revolver
+weapon_smg1,SMG
+weapon_shotgun,Shotgun
+weapon_frag,Grenade
+weapon_ar2,Plasma Rifle
+weapon_rpg,Rocket
+weapon_crossbow,X-Bow
 ]]
 
 function TOWER.Size()
@@ -36,13 +36,17 @@ function TOWER.LoadTower(name)
       local fin = file.Open("zenkillers/" .. name .. ".txt", "r", "DATA")
       local weapons = {}
       while not fin:EndOfFile() do
-         local weapon = fin:ReadLine():gsub("[\n\r ]", "")
+         local weapon = fin:ReadLine():gsub("[\n\r]", "")
          if weapon != "" then
-            table.insert(weapons, weapon)
+            local splitWeapon = string.Split(weapon, ",")
+            if #splitWeapon == 1 then
+               table.insert(weapons, {className=weapon, prettyName=weapon})
+            else
+               table.insert(weapons, {className=splitWeapon[1], prettyName=splitWeapon[2]})
+            end
             MsgN("zenkillers: Inserted " .. weapon)
          end
       end
-      PrintTable(weapons)
       TOWER.WEAPONS = weapons
    end
 end
@@ -50,19 +54,7 @@ end
 function TOWER.GetWeaponNames()
    local names = {}
    for _, w in ipairs(TOWER.WEAPONS) do
-      local weaponTable = weapons.Get(w)
-      local name
-      if weaponTable then
-         name = weaponTable.PrintName
-         if name == "Scripted Weapon" then
-            -- Come on yall take some pride in your work...
-            name = w
-         end
-      else
-         -- Engine weapons don't have a weapon table?
-         name = w
-      end
-      table.insert(names, name)
+      table.insert(names, w.prettyName)
    end
    table.insert(names, "Knife")
    return names

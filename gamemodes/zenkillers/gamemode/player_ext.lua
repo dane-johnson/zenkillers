@@ -18,7 +18,7 @@ function plymeta:ReceiveWeapons()
    timer.Simple(delay, function()
                    local level = self:GetTowerLevel()
                    if level < TOWER.Size() then
-                      local weapon = self:Give(TOWER.WEAPONS[level])
+                      local weapon = self:Give(TOWER.WEAPONS[level].className)
                    end
                    self:Give("weapon_zk_knife")
    end)
