@@ -12,7 +12,7 @@ function GM:PlayerLoadout(ply)
 end
 
 function GM:PlayerDeath(victim, inflictor, attacker)
-   if victim == attacker then
+   if victim == attacker or attacker == game.GetWorld() then
       -- suicide resets the player
       TOWER.ResetPlayer(victim)
    elseif IsValid(attacker:GetActiveWeapon()) and attacker:GetActiveWeapon():GetClass() == "weapon_zk_knife" then
