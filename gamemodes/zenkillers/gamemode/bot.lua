@@ -1,3 +1,5 @@
+CreateConVar("zk_bot_ai", 0, FCVAR_NONE, "Determines whether or not the vicious bot AI is active")
+
 function BotAI(bot, cmd)
    if not bot:IsBot() then return end
    if not bot:Alive() then
@@ -5,6 +7,7 @@ function BotAI(bot, cmd)
       cmd:SetButtons(IN_ATTACK)
       return
    end
+   if not GetConVar("zk_bot_ai"):GetBool() then return end
    cmd:ClearMovement()
    cmd:ClearButtons()
 
