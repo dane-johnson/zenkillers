@@ -39,9 +39,11 @@ function SWEP:PrimaryAttack()
    local kmins = Vector(1, 1, 1) * -10
    local kmaxs = Vector(1, 1, 1) * 10
 
+   self.Owner:LagCompensation(true)
+
    local tr = util.TraceHull({start=spos, endpos=sdest, filter=self:GetOwner(), mask=MASK_SHOT_HULL, mins=kmins, maxs=kmaxs})
 
-   print(tr.Entity)
+   self.Owner:LagCompensation(false)
 
    -- If we hit the environment, just do a ray trace.
    if not IsValid(tr.Entity) then
