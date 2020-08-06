@@ -1,3 +1,6 @@
+include("vgui/playerlist.lua")
+include("vgui/weaponslist.lua")
 include("cl_hud.lua")
+include("cl_scoreboard.lua")
 include("shared.lua")
 include("player_ext_shd.lua")

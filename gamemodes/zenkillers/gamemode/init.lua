@@ -1,7 +1,10 @@
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("cl_hud.lua")
+AddCSLuaFile("cl_scoreboard.lua")
 AddCSLuaFile("shared.lua")
 AddCSLuaFile("player_ext_shd.lua")
+AddCSLuaFile("vgui/weaponslist.lua")
+AddCSLuaFile("vgui/playerlist.lua")
 
 include("bot.lua")
 include("tower.lua")
