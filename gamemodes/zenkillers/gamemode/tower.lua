@@ -79,6 +79,8 @@ end
 function TOWER.ResetPlayer(ply)
    local level = 1 -- As it was in the beginning...
    ply:SetTowerLevel(1)
+   ply:SetFrags(0)
+   ply:SetDeaths(0)
 end
 
 function TOWER.HasWon(ply)
