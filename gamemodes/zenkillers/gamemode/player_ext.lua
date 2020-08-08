@@ -13,14 +13,9 @@ end
 function plymeta:ReceiveWeapons()
    self:StripWeapons()
 
-   local delay = GetConVarNumber("zk_equipdelay")
-   -- Give them new guns after 0.75 seconds (to keep from going to fast)
-   timer.Simple(delay, function()
-                   local level = self:GetTowerLevel()
-                   if level < TOWER.Size() then
-                      local weapon = self:Give(TOWER.WEAPONS[level].className)
-                   end
-                   self:Give("weapon_zk_knife")
-   end)
-   -- Prevent default loadout
+   local level = self:GetTowerLevel()
+   if level < TOWER.Size() then
+      local weapon = self:Give(TOWER.WEAPONS[level].className)
+   end
+   self:Give("weapon_zk_knife")
 end
