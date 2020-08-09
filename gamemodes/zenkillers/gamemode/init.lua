@@ -28,6 +28,8 @@ function EndGame(winner)
    Announce(winner:Nick() .. " has won!")
    for _, ply in ipairs(player.GetAll()) do
       TOWER.ResetPlayer(ply)
+      ply:SetFrags(0)
+      ply:SetDeaths(0)
       ply:KillSilent()
    end
 end
