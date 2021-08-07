@@ -83,5 +83,5 @@ end
 
 function TOWER.HasWon(ply)
    local level = ply:GetTowerLevel()
-   return level == TOWER.Size()
+   return level >= TOWER.Size()
 end

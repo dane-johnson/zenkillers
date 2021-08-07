@@ -12,10 +12,10 @@ function GM:PlayerLoadout(ply)
 end
 
 function GM:PlayerDeath(victim, inflictor, attacker)
-   if victim == attacker or attacker == game.GetWorld() then
+   if victim == attacker or attacker == game.GetWorld() or attacker:GetClass() == "trigger_hurt" then
       -- suicide resets the player
       TOWER.ResetPlayer(victim)
-   elseif IsValid(attacker:GetActiveWeapon()) and attacker:GetActiveWeapon():GetClass() == "weapon_zk_knife" then
+   elseif IsValid(attacker:GetActiveWeapon()) and inflictor:GetClass() == "weapon_zk_knife" then
       TOWER.ResetPlayer(victim)
       if TOWER.HasWon(attacker) then
          EndGame(attacker)

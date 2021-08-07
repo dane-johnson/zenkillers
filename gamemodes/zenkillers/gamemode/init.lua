@@ -1,10 +1,12 @@
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("cl_hud.lua")
 AddCSLuaFile("cl_scoreboard.lua")
+AddCSLuaFile("cl_towercreator.lua")
 AddCSLuaFile("shared.lua")
 AddCSLuaFile("player_ext_shd.lua")
 AddCSLuaFile("vgui/weaponslist.lua")
 AddCSLuaFile("vgui/playerlist.lua")
+AddCSLuaFile("vgui/swepmenu.lua")
 
 include("bot.lua")
 include("tower.lua")
@@ -12,6 +14,7 @@ include("shared.lua")
 include("player.lua")
 include("player_ext.lua")
 include("player_ext_shd.lua")
+include("debug.lua")
 
 local player = player
 
