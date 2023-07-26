@@ -24,3 +24,11 @@ function GM:PlayerDeath(victim, inflictor, attacker)
       TOWER.PromotePlayer(attacker)
    end
 end
+
+function GM:PlayerCanPickupWeapon(ply, wep)
+   -- Player can only pick up the current tower weapon and a knife
+   return
+      GetConVar("zk_allow_pickups"):GetBool() or
+      wep:GetClass() == "weapon_zk_knife" or
+      wep:GetClass() == ply:GetTowerClass()
+end

@@ -22,5 +22,13 @@
                         "type"  "Numeric"
                         "default" 0.75
                 }
+		3
+		{
+			"name"	"zk_allow_pickups"
+			"text"	"Allow Pickups"
+			"help"	"Whether or not a player is allows to pick up dropped weapons"
+			"type" 	"CheckBox"
+			"default" false
+		}
         }
 }

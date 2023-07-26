@@ -13,9 +13,9 @@ end
 function plymeta:ReceiveWeapons()
    self:StripWeapons()
 
-   local level = self:GetTowerLevel()
-   if level < TOWER.Size() then
-      local weapon = self:Give(TOWER.WEAPONS[level].className)
+   local wep = self:GetTowerClass()
+   if wep then
+      self:Give(wep)
    end
    self:Give("weapon_zk_knife")
 end
