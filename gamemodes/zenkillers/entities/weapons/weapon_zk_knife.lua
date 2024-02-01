@@ -30,61 +30,61 @@ SWEP.Secondary.Automatic = false
 SWEP.Secondary.Ammo = "none"
 
 function SWEP:PrimaryAttack()
-   self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
+  self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
 
-   -- Hull trace a short attack
-   local spos = self:GetOwner():GetShootPos()
-   local sdest = spos + (self:GetOwner():GetAimVector() * 70)
+  -- Hull trace a short attack
+  local spos = self:GetOwner():GetShootPos()
+  local sdest = spos + (self:GetOwner():GetAimVector() * 70)
 
-   local kmins = Vector(1, 1, 1) * -10
-   local kmaxs = Vector(1, 1, 1) * 10
+  local kmins = Vector(1, 1, 1) * -10
+  local kmaxs = Vector(1, 1, 1) * 10
 
-   self.Owner:LagCompensation(true)
+  self.Owner:LagCompensation(true)
 
-   local tr = util.TraceHull({start=spos, endpos=sdest, filter=self:GetOwner(), mask=MASK_SHOT_HULL, mins=kmins, maxs=kmaxs})
+  local tr = util.TraceHull({start=spos, endpos=sdest, filter=self:GetOwner(), mask=MASK_SHOT_HULL, mins=kmins, maxs=kmaxs})
 
-   self.Owner:LagCompensation(false)
+  self.Owner:LagCompensation(false)
 
-   -- If we hit the environment, just do a ray trace.
-   if not IsValid(tr.Entity) then
-      tr = util.TraceLine({start=spos, endpos=sdest, filter=self:GetOwner(), mask=MASK_SHOT_HULL})
-   end
+  -- If we hit the environment, just do a ray trace.
+  if not IsValid(tr.Entity) then
+    tr = util.TraceLine({start=spos, endpos=sdest, filter=self:GetOwner(), mask=MASK_SHOT_HULL})
+  end
 
-   local hitEnt = tr.Entity
+  local hitEnt = tr.Entity
 
-   -- Blood
-   if IsValid(hitEnt) then
-      local edata = EffectData()
-      edata:SetStart(spos)
-      edata:SetOrigin(tr.HitPos)
-      edata:SetNormal(tr.Normal)
-      edata:SetEntity(hitEnt)
+  -- Blood
+  if IsValid(hitEnt) then
+    local edata = EffectData()
+    edata:SetStart(spos)
+    edata:SetOrigin(tr.HitPos)
+    edata:SetNormal(tr.Normal)
+    edata:SetEntity(hitEnt)
 
-      if hitEnt:IsPlayer() or hitEnt:GetClass() == "prop_ragdoll" then
-         util.Effect("BloodImpact", edata)
-      end
-   end
+    if hitEnt:IsPlayer() or hitEnt:GetClass() == "prop_ragdoll" then
+      util.Effect("BloodImpact", edata)
+    end
+  end
 
-   if IsValid(hitEnt) then
-      self:SendWeaponAnim(ACT_VM_SECONDARYATTACK)
-      self:EmitSound("Weapon_Knife.Stab")
-      if SERVER and hitEnt:IsPlayer() then
-         -- Dead
-         local dmg = DamageInfo()
-         dmg:SetDamage(hitEnt:Health() + 1)
-         dmg:SetAttacker(self:GetOwner())
-         dmg:SetInflictor(self)
-         dmg:SetDamageForce(self:GetOwner():GetAimVector() * 5)
-         dmg:SetDamagePosition(self:GetOwner():GetPos())
-         dmg:SetDamageType(DMG_SLASH)
-         hitEnt:TakeDamageInfo(dmg)
-      end
-   else
-      self:SendWeaponAnim(ACT_VM_MISSCENTER)
-      self:EmitSound("Weapon_Knife.Slash")   
-   end
+  if IsValid(hitEnt) then
+    self:SendWeaponAnim(ACT_VM_SECONDARYATTACK)
+    self:EmitSound("Weapon_Knife.Stab")
+    if SERVER and hitEnt:IsPlayer() then
+      -- Dead
+      local dmg = DamageInfo()
+      dmg:SetDamage(hitEnt:Health() + 1)
+      dmg:SetAttacker(self:GetOwner())
+      dmg:SetInflictor(self)
+      dmg:SetDamageForce(self:GetOwner():GetAimVector() * 5)
+      dmg:SetDamagePosition(self:GetOwner():GetPos())
+      dmg:SetDamageType(DMG_SLASH)
+      hitEnt:TakeDamageInfo(dmg)
+    end
+  else
+    self:SendWeaponAnim(ACT_VM_MISSCENTER)
+    self:EmitSound("Weapon_Knife.Slash")
+  end
 
-   if SERVER then
-      self:GetOwner():SetAnimation(PLAYER_ATTACK1)
-   end
+  if SERVER then
+    self:GetOwner():SetAnimation(PLAYER_ATTACK1)
+  end
 end
